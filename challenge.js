@@ -1,5 +1,7 @@
-movieScript = function(){
-
+var titles = [];
+var imgs = [];
+var pos = 0;
+movieScript = function(keyEvent){
 	var movieData = "http://test.frontendhero.nl/movie-challenge/movies.json";
 	var myRequest;
 
@@ -20,13 +22,9 @@ movieScript = function(){
 			}
 		}
 	}
-
 	myRequest.onreadystatechange = function(){
-
-		if(myRequest.readyState == 4){	
-			var jsonObj = JSON.parse(myRequest.responseText);
-
-			var output = '<ul>';//Start of the unordered list
+		if(myRequest.readyState == 4){               
+			var jsonObj = JSON.parse(myRequest.responseText);//Grabs json object
 			var data = jsonObj.data; //Grabbing data objects from json
 			var assets; //Will hold array of data objects
 			var actionMovies =[]; //Array for actionMovie objects
@@ -42,27 +40,47 @@ movieScript = function(){
 					}
 				}
 			}
-
-			//Unordered list for movies
-			for(var key in actionMovies){
-				output 
-				+= '<li class="list-item"><h1 class="title">'
-				+ actionMovies[key].title + '</h1>' 
-				+ '<img src= " ' + actionMovies[key].img + ' "/>'
-				+'</li>'
+			//Version 3 add each element to an array
+			for(var key in actionMovies){                                    
+				titles[pos] = actionMovies[key].title;
+				imgs[pos] = actionMovies[key].img;
+				pos++;
 			}
-			output += '</ul>'
-
-			document.getElementById('output').innerHTML = output;
+			pos = 0;
+			document.addEventListener('DOMContentLoaded', newMovieItem(titles[pos], imgs[pos]), false);
+			/*********************************************************/
 		}
 	}
 	myRequest.open("GET", movieData, true);
 	myRequest.send();
 };
+newMovieItem = function(singleTitle, singleImg){
+	var currentMovie = ""; //Empty string for current movie
+	currentMovie
+	+= '<li class="list-item"><h1 class="title">'
+	+ singleTitle + '</h1>'
+	+ '<img src= " ' + singleImg + ' "/>'
+	+'</li>';
+	document.getElementById('ul-list').innerHTML = currentMovie;
+	document.addEventListener("keydown", detectKey);
+};
 
-document.addEventListener('DOMContentLoaded', function() {
-	//Need to somehow change and add background colors 
-
-
-}, false);
-
+detectKey = function(e){
+        var keyPushed = e.keyCode ? e.keyCode : e.charCode;
+        if(39 == keyPushed && (pos+1) != titles.length){
+		//Move to right next element unless nextElement = t.length or i.length
+		pos = pos + 1;
+		newMovieItem(titles[pos], imgs[pos], keyPushed);
+	}
+	else if(37 == keyPushed && (pos-1) >= 0 ){
+		//Move to left next element unless nextElement = 0
+		pos = pos - 1;
+		newMovieItem(titles[pos], imgs[pos], keyPushed);
+	}
+	else if( (pos+1) == titles.length || (pos-1) == 0 ){
+		newMovieItem(titles[pos], imgs[pos], keyPushed);
+	}
+	else{
+		console.log("Right nor the left arrow keys were pressed");
+	}
+};
