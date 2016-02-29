@@ -28,11 +28,9 @@ movieScript = function(keyEvent){
 			var data = jsonObj.data; //Grabbing data objects from json
 			var assets; //Will hold array of data objects
 			var actionMovies =[]; //Array for actionMovie objects
-
 			//Outer level of json
 			for(var key in data){
 				assets = data[key].assets;
-
 				//Movie data of the json file
 				for(var x in assets){
 					if(assets[x].genre === "Action"){
@@ -40,7 +38,7 @@ movieScript = function(keyEvent){
 					}
 				}
 			}
-			//Version 3 add each element to an array
+			//Add each element to an array
 			for(var key in actionMovies){                                    
 				titles[pos] = actionMovies[key].title;
 				imgs[pos] = actionMovies[key].img;
@@ -48,7 +46,6 @@ movieScript = function(keyEvent){
 			}
 			pos = 0;
 			document.addEventListener('DOMContentLoaded', newMovieItem(titles[pos], imgs[pos]), false);
-			/*********************************************************/
 		}
 	}
 	myRequest.open("GET", movieData, true);
@@ -65,8 +62,8 @@ newMovieItem = function(singleTitle, singleImg){
 	document.addEventListener("keydown", detectKey);
 };
 
-detectKey = function(e){
-        var keyPushed = e.keyCode ? e.keyCode : e.charCode;
+detectKey = function(eve){
+        var keyPushed = eve.keyCode ? eve.keyCode : eve.charCode;
         if(39 == keyPushed && (pos+1) != titles.length){
 		//Move to right next element unless nextElement = t.length or i.length
 		pos = pos + 1;

@@ -2,40 +2,16 @@
 <html>
 <head>
                 <title>Movie Scroller</title>
+                <link href='https://fonts.googleapis.com/css?family=Raleway:400,600' rel='stylesheet' type='text/css'>
+                <link rel="stylesheet" href="style.css">
                 <script src="challenge.js"></script>
-<style>
-                *{
-                                margin: 0;
-                                padding: 0;
-                }
-                #output{
-                                margin: 0 auto;
-                                padding: 20px;
-                }
-                h1{
-                                color: white;
-                }
-                li{
-                                list-style-type:none;
-                                display: inline-block;
-                                text-align: center;
-                                width: 33%;
-                                border: 1px solid black;
-                                background-color: #333;
-                }
-                .active{
-                                background-color: blue;
-                }
-</style>
- 
 </head>
 <body  onload='movieScript()'>
- 
-<div id="movie-container">
- 
-                <div id="output">
-                                <ul id="ul-list"></ul>
-                </div>
-</div>             
-</body>             
+<h1 class="header">Action Movies</h1>
+<div id="movieContainer">
+        <div id="output">
+                        <ul id="ul-list"></ul>
+        </div>
+</div>         
+</body>     
 </html>
