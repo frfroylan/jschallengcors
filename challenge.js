@@ -76,7 +76,7 @@ console.log("nextLi:  " + nextLi);
 };
 detectKey = function(eve){
         var keyPushed = eve.keyCode ? eve.keyCode : eve.charCode; //Code to evaluate which key was pressed
- /*** THIS ONE TOO BELOW:
+ /*** THIS ONE TOO BELOW: 
         currentLi = document.getElementById('movieTitle');
 console.log("currentLi:  " + currentLi);
 **/  
