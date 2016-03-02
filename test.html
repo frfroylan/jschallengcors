@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+	#box1{
+		background-color: #333;
+		width: 400px;
+		height: 200px;
+	}
+</style>
+<script>
+function changeBG(el, clr){
+	console.log("heer");
+	var elem = document.getElementById(el);
+	elem.style .transition = 'background 1.0s linear 0s';
+	elem.style.background = clr;
+}
+</script>
+</head>
+<body>
+	<button onclick="changeBG('box1', '#f0f');">Magenta</button>
+	<div id="box1">Conent in box 1...</div>
+</body>
+</html>

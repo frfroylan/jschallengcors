@@ -3,28 +3,59 @@ body{
         font-family: 'Raleway';
 }
 #movieContainer{
-        width: 100%;
+        width: 80%;
         height: 80%;
+        margin: 0 auto;
+        margin-top: 100px;
         display: flex;
         flex-flow: row nowrap;
         align-items: center;
         justify-content: center;
+        background-color: #333;
 }
 .header{
         color:white;
         font-weight: 600;
+        text-align: center;
 }
 h1{
         font-weight: 400;
         color: white;
         font-size: 32px;
 }
+.title{
+        opacity: 1;
+}
 li{
         list-style-type: none;
         text-align: center;
+        opacity: 1;
 }
 img{
         width: 350px;
         height: 500px;
+        border-radius: 15px;
+        opacity: 1;
 }
-
+.imgIndicatorWrapper{
+        width: 100px;
+        height: 50px;
+        text-align: center;
+        margin: 0 auto;
+}
+.imgIndicator{
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 10px;
+        background-color: #333;
+}
+i{
+        color: beige;
+}
+.fa-arrow-right{
+        margin-left: 40px;
+}
+i:hover{
+        color: #2C3E50;
+}

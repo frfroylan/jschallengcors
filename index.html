@@ -3,15 +3,25 @@
 <head>
                 <title>Movie Scroller</title>
                 <link href='https://fonts.googleapis.com/css?family=Raleway:400,600' rel='stylesheet' type='text/css'>
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
                 <link rel="stylesheet" href="style.css">
                 <script src="challenge.js"></script>
 </head>
 <body  onload='movieScript()'>
-<h1 class="header">Action Movies</h1>
-<div id="movieContainer">
-        <div id="output">
-                        <ul id="ul-list"></ul>
-        </div>
-</div>         
-</body>     
+ 
+                <h1 class="header">Action Movies</h1>
+                <div id="movieContainer">
+                                <i class="fa fa-arrow-left fa-3x" onclick='arrow("left")'></i>
+                                <div id="output">
+                                                <ul id="ul-list"></ul>
+                                </div>
+                                <i class="fa fa-arrow-right fa-3x" onclick='arrow("right")'></i>
+                </div>        
+                <div class="imgIndicatorWrapper">
+                                <div class="imgIndicator"></div>
+                                <div class="imgIndicator"></div>
+                                <div class="imgIndicator"></div>
+                </div>
+ 
+</body>    
 </html>
