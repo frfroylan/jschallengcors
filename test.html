@@ -7,18 +7,23 @@
 		width: 400px;
 		height: 200px;
 	}
+	.animation{
+		background-color: #333;
+		animation: myAni 1s;
+	}
+	@keyframes myAni{
+		0%{margin-left: 0px; background-color: 'blue'}
+		100%{margin-left: 100px; background-color: 'blue'}
+	}
 </style>
 <script>
-function changeBG(el, clr){
-	console.log("heer");
-	var elem = document.getElementById(el);
-	elem.style .transition = 'background 1.0s linear 0s';
-	elem.style.background = clr;
+function addclass(){
+	var box = document.getElementById('box1');
+	box.className = 'animation';
 }
 </script>
 </head>
-<body>
-	<button onclick="changeBG('box1', '#f0f');">Magenta</button>
+<body onload="addclass()">
 	<div id="box1">Conent in box 1...</div>
 </body>
 </html>

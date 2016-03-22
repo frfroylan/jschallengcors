@@ -52,39 +52,13 @@ movieScript = function(){
         myRequest.open("GET", movieData, true);
         myRequest.send();
 };
-
-var currentLi;
-var nextLi;
-//This function creates a new li element for the movie
-newMovieItem = function(singleTitle, singleImg){
-
-        var currentMovie = ""; //Empty string for current movie
-        currentMovie
-        += '<li class="list-item" id="li"><h1 class="title" id="movieTitle">'
-        + singleTitle + '</h1>'
-        + '<img src= " ' + singleImg + ' "/>'
-        +'</li>';
-        document.getElementById('ul-list').innerHTML = currentMovie; //Add li to DOM
-/*****
-        nextLi = document.getElementById('movieTitle');
-        nextLi.style.transition = 'opacity .5s linear 0s';
-        nextLi.style.opacity = 1;
-console.log("nextLi:  " + nextLi);
-******Animation above is not working!
-*/
-        document.addEventListener("keydown", detectKey); //Listen for any keys being pushed
-};
 detectKey = function(eve){
         var keyPushed = eve.keyCode ? eve.keyCode : eve.charCode; //Code to evaluate which key was pressed
- /*** THIS ONE TOO BELOW: 
-        currentLi = document.getElementById('movieTitle');
-console.log("currentLi:  " + currentLi);
-**/  
+        var li = document.getElementById('li');
+
         if(39 == keyPushed && (pos+1) != titles.length){
                 //Move to right next li element (next movie) unless nextElement = t.length or i.length
-                // currentLi.style.transition = 'opacity .5s linear 0s';
-                // currentLi.style.opacity = 0;
-
+                fade(li);        
                 imgIndicators[pos].style.backgroundColor = '#333';//Change current imgIndicator to normal color
                 pos = pos + 1; //increment global position variable
                 imgIndicators[pos].style.backgroundColor = 'white'; //Change the imgIndicator color of the next movie
@@ -92,6 +66,7 @@ console.log("currentLi:  " + currentLi);
         }
         else if(37 == keyPushed && (pos-1) >= 0 ){
                 //Move to left next element unless nextElement = 0
+                fade(li);
                 imgIndicators[pos].style.backgroundColor = '#333';//Change current imgIndicator to normal color
                 pos = pos - 1;//decrement global position variable
                 imgIndicators[pos].style.backgroundColor = 'white';//Change the imgIndicator color of the next movie
@@ -99,46 +74,65 @@ console.log("currentLi:  " + currentLi);
         }
         else if(39 == keyPushed  &&  (pos+1) == titles.length){
                 //Case for no valid keys being pushed, dont do anything
+                fade(li);
                 imgIndicators[pos].style.backgroundColor = '#333';
                 pos = 0;
                 newMovieItem(titles[pos], imgs[pos], keyPushed);
                 imgIndicators[pos].style.backgroundColor = 'white';
         }
-        else if( 37 == keyPushed && (pos-1) <0 ){
-        		imgIndicators[pos].style.backgroundColor = '#333';
-        		pos = titles.length - 1;
-        		newMovieItem(titles[pos], imgs[pos], keyPushed);
-        		imgIndicators[pos].style.backgroundColor = 'white';
+        else if( 37 == keyPushed && (pos-1) < 0 ){
+                fade(li);
+                imgIndicators[pos].style.backgroundColor = '#333';
+                pos = titles.length - 1;
+                newMovieItem(titles[pos], imgs[pos], keyPushed);
+                imgIndicators[pos].style.backgroundColor = 'white';
         }
 };
 arrow = function(arrow){
         if(arrow === 'right' && (pos+1) != titles.length){
-		//Move to right next element unless nextElement = t.length or i.length
-		// titles[pos].style.transition = 'opacity 1s linear 0s';
-		// titles[pos].style.opacity = 0;
-		imgIndicators[pos].style.backgroundColor = '#333';
-		pos = pos + 1;
-		imgIndicators[pos].style.backgroundColor = 'white';
-		newMovieItem(titles[pos], imgs[pos], 39);
+                //Move to right next element unless nextElement = t.length or i.length
+                fade(li);
+                imgIndicators[pos].style.backgroundColor = '#333';
+                pos = pos + 1;
+                imgIndicators[pos].style.backgroundColor = 'white';
+                newMovieItem(titles[pos], imgs[pos], 39);
         }
         else if(arrow === 'left' && (pos-1) >= 0 ){
-		//Move to left next element unless nextElement = 0
-		imgIndicators[pos].style.backgroundColor = '#333';
-		pos = pos - 1;
-		imgIndicators[pos].style.backgroundColor = 'white';
-		newMovieItem(titles[pos], imgs[pos], 37);
+                //Move to left next element unless nextElement = 0
+                fade(li);
+                imgIndicators[pos].style.backgroundColor = '#333';
+                pos = pos - 1;
+                imgIndicators[pos].style.backgroundColor = 'white';
+                newMovieItem(titles[pos], imgs[pos], 37);
         }
         else if(arrow === 'right'  &&  (pos+1) == titles.length){
-		//Case for no valid keys being pushed, dont do anything
-		imgIndicators[pos].style.backgroundColor = '#333';
-		pos = 0;
-		newMovieItem(titles[pos], imgs[pos], 39);
-		imgIndicators[pos].style.backgroundColor = 'white';
-	  }
-	else if( arrow === 'left' && (pos-1) <0 ){
-		imgIndicators[pos].style.backgroundColor = '#333';
-		pos = titles.length - 1;
-		newMovieItem(titles[pos], imgs[pos], 37);
-		imgIndicators[pos].style.backgroundColor = 'white';
-	}
+                //Case for no valid keys being pushed, dont do anything
+                fade(li);
+                imgIndicators[pos].style.backgroundColor = '#333';
+                pos = 0;
+                newMovieItem(titles[pos], imgs[pos], 39);
+                imgIndicators[pos].style.backgroundColor = 'white';
+        }
+        else if( arrow === 'left' && (pos-1) <0 ){
+                fade(li);
+                imgIndicators[pos].style.backgroundColor = '#333';
+                pos = titles.length - 1;
+                newMovieItem(titles[pos], imgs[pos], 37);
+                imgIndicators[pos].style.backgroundColor = 'white';
+        }
 }
+fade = function(x){
+	x.classList.add('animate');
+}
+//This function creates a new li element for the movie
+newMovieItem = function(singleTitle, singleImg){
+        var currentMovie = ""; //Empty string for current movie
+
+        currentMovie
+        += '<li class="list-item" id="li"><h1 class="title" id="movieTitle">'
+        + singleTitle + '</h1>'
+        + '<img src= " ' + singleImg + ' "/>'
+        +'</li>';
+        document.getElementById('ul-list').innerHTML = currentMovie; //Add li to DOM
+        document.addEventListener("keydown", detectKey); //Listen for any keys being pushed
+};

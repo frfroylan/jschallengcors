@@ -23,8 +23,13 @@ h1{
         color: white;
         font-size: 32px;
 }
-.title{
-        opacity: 1;
+.animate{
+        animation: fade 1s linear;
+}
+@keyframes fade{
+        0%{opacity: 1; }
+        50%{opacity: .5; }
+        100%{opacity: 0; }
 }
 li{
         list-style-type: none;
