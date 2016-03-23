@@ -54,85 +54,97 @@ movieScript = function(){
 };
 detectKey = function(eve){
         var keyPushed = eve.keyCode ? eve.keyCode : eve.charCode; //Code to evaluate which key was pressed
-        var li = document.getElementById('li');
+        var li = document.getElementsByTagName('li');
 
         if(39 == keyPushed && (pos+1) != titles.length){
                 //Move to right next li element (next movie) unless nextElement = t.length or i.length
-                fade(li);        
+                li[pos].classList.add('animate');
                 imgIndicators[pos].style.backgroundColor = '#333';//Change current imgIndicator to normal color
                 pos = pos + 1; //increment global position variable
                 imgIndicators[pos].style.backgroundColor = 'white'; //Change the imgIndicator color of the next movie
-                newMovieItem(titles[pos], imgs[pos], keyPushed); //Create a new movie positioned at pos
+                li[pos].classList.remove('animate');
         }
         else if(37 == keyPushed && (pos-1) >= 0 ){
                 //Move to left next element unless nextElement = 0
-                fade(li);
+                li[pos].classList.add('animate');
                 imgIndicators[pos].style.backgroundColor = '#333';//Change current imgIndicator to normal color
                 pos = pos - 1;//decrement global position variable
                 imgIndicators[pos].style.backgroundColor = 'white';//Change the imgIndicator color of the next movie
-                newMovieItem(titles[pos], imgs[pos], keyPushed);//Create a new movie positioned at pos
+                li[pos].classList.remove('animate');
         }
         else if(39 == keyPushed  &&  (pos+1) == titles.length){
                 //Case for no valid keys being pushed, dont do anything
-                fade(li);
+                li[pos].classList.add('animate');
                 imgIndicators[pos].style.backgroundColor = '#333';
                 pos = 0;
-                newMovieItem(titles[pos], imgs[pos], keyPushed);
                 imgIndicators[pos].style.backgroundColor = 'white';
+                li[pos].classList.remove('animate');
         }
         else if( 37 == keyPushed && (pos-1) < 0 ){
-                fade(li);
+                li[pos].classList.add('animate');
                 imgIndicators[pos].style.backgroundColor = '#333';
                 pos = titles.length - 1;
-                newMovieItem(titles[pos], imgs[pos], keyPushed);
                 imgIndicators[pos].style.backgroundColor = 'white';
+                li[pos].classList.remove('animate');
         }
 };
 arrow = function(arrow){
+        var li = document.getElementsByTagName('li');
         if(arrow === 'right' && (pos+1) != titles.length){
                 //Move to right next element unless nextElement = t.length or i.length
-                fade(li);
+                li[pos].classList.add('animate');
                 imgIndicators[pos].style.backgroundColor = '#333';
                 pos = pos + 1;
                 imgIndicators[pos].style.backgroundColor = 'white';
-                newMovieItem(titles[pos], imgs[pos], 39);
+                li[pos].classList.remove('animate');
         }
         else if(arrow === 'left' && (pos-1) >= 0 ){
                 //Move to left next element unless nextElement = 0
-                fade(li);
+                li[pos].classList.add('animate');
                 imgIndicators[pos].style.backgroundColor = '#333';
                 pos = pos - 1;
                 imgIndicators[pos].style.backgroundColor = 'white';
-                newMovieItem(titles[pos], imgs[pos], 37);
+                li[pos].classList.remove('animate');
         }
         else if(arrow === 'right'  &&  (pos+1) == titles.length){
                 //Case for no valid keys being pushed, dont do anything
-                fade(li);
+                li[pos].classList.add('animate');
                 imgIndicators[pos].style.backgroundColor = '#333';
                 pos = 0;
-                newMovieItem(titles[pos], imgs[pos], 39);
                 imgIndicators[pos].style.backgroundColor = 'white';
+                li[pos].classList.remove('animate');
         }
         else if( arrow === 'left' && (pos-1) <0 ){
-                fade(li);
+                li[pos].classList.add('animate');
                 imgIndicators[pos].style.backgroundColor = '#333';
                 pos = titles.length - 1;
-                newMovieItem(titles[pos], imgs[pos], 37);
                 imgIndicators[pos].style.backgroundColor = 'white';
+                li[pos].classList.remove('animate');
         }
 }
-fade = function(x){
-	x.classList.add('animate');
-}
+
 //This function creates a new li element for the movie
 newMovieItem = function(singleTitle, singleImg){
         var currentMovie = ""; //Empty string for current movie
 
-        currentMovie
-        += '<li class="list-item" id="li"><h1 class="title" id="movieTitle">'
-        + singleTitle + '</h1>'
-        + '<img src= " ' + singleImg + ' "/>'
-        +'</li>';
-        document.getElementById('ul-list').innerHTML = currentMovie; //Add li to DOM
+        if(singleTitle == 'Avatar'){
+                currentMovie
+                += '<h1 class="title" id="movieTitle">'+ singleTitle + '</h1>'
+                + '<img src= " ' + singleImg + ' "/>';
+                document.getElementById('movieAvatar').innerHTML = currentMovie; //Add li to DOM
+        }
+        else if(singleTitle == 'Quantum of Solace'){
+                currentMovie
+                += '<h1 class="title" id="movieTitle">'+ singleTitle + '</h1>'
+                + '<img src= " ' + singleImg + ' "/>';
+                document.getElementById('movieSolstice').innerHTML = currentMovie; //Add li to DOM
+        }
+        else if(singleTitle == 'Brick Mansions'){
+                currentMovie
+                += '<h1 class="title" id="movieTitle">'+ singleTitle + '</h1>'
+                + '<img src= " ' + singleImg + ' "/>';
+                document.getElementById('movieBrick').innerHTML = currentMovie; //Add li to DOM
+        }
+
         document.addEventListener("keydown", detectKey); //Listen for any keys being pushed
 };
